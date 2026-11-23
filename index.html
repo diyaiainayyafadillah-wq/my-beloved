@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>My Little Scrapbook</title>
+<title>My Beloved Bunda ♡</title>
 
 <style>
 * {
@@ -13,171 +13,354 @@
 
 body {
     margin: 0;
-    background: #fff0f5;
-    color: #87566b;
+    background: #F8DCE5;
     font-family: Georgia, serif;
+    color: #B04A70;
     text-align: center;
 }
 
-header {
-    background: linear-gradient(135deg, #f6bfd2, #ffe1eb);
-    padding: 55px 15px;
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 15px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.page.active {
+    display: flex;
+}
+
+.book {
+    width: min(95%, 750px);
+    min-height: 650px;
+    padding: 35px 25px;
+    background: #FCEEF2;
+    border: 3px solid #E5A2B7;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px #B04A7033;
+    position: relative;
 }
 
 h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: clamp(30px, 6vw, 48px);
+    color: #B84D75;
+    letter-spacing: 2px;
+}
+
+h2 {
+    color: #C45D82;
+    letter-spacing: 2px;
+}
+
+p {
+    line-height: 1.9;
+    font-size: 17px;
+}
+
+.heart {
+    font-size: 35px;
+    margin: 15px;
+}
+
+.cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 570px;
+}
+
+.cover h1 {
+    line-height: 1.5;
 }
 
 .subtitle {
     font-style: italic;
+    color: #A65A75;
 }
 
-button {
-    background: #d87599;
-    color: white;
-    border: none;
-    padding: 13px 25px;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 10px;
-    font-size: 15px;
-}
-
-button:hover {
-    background: #bd5e83;
-}
-
-h2 {
-    margin-top: 40px;
-}
-
-.album {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 20px;
+.photo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 530px;
+    margin: 30px auto;
 }
 
-.photo {
+.polaroid {
     background: white;
-    padding: 12px 12px 25px;
-    box-shadow: 0 5px 15px #d8a5b7;
+    padding: 10px 10px 18px;
+    border: 2px solid #E5A2B7;
+    box-shadow: 0 4px 10px #B04A7022;
     transform: rotate(-2deg);
-    transition: 0.3s;
 }
 
-.photo:nth-child(even) {
+.polaroid:nth-child(even) {
     transform: rotate(2deg);
 }
 
-.photo:hover {
-    transform: rotate(0deg) scale(1.05);
-}
-
-.photo img {
+.polaroid img {
     width: 100%;
-    height: 210px;
+    height: 145px;
     object-fit: cover;
+    background: #F8DCE5;
 }
 
-.photo p {
-    margin-top: 15px;
+.caption {
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
 }
 
-.note {
-    background: #fffafd;
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px #eac2d2;
+.letter {
+    max-width: 550px;
+    margin: 35px auto;
+    text-align: left;
+    line-height: 2;
+    font-size: 17px;
 }
 
-.heart {
-    font-size: 25px;
-    animation: beat 1s infinite alternate;
+.signature {
+    text-align: right;
+    color: #B84D75;
+    font-style: italic;
 }
 
-@keyframes beat {
-    from { transform: scale(1); }
-    to { transform: scale(1.3); }
+button {
+    background: #C45D82;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    margin: 8px;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    cursor: pointer;
 }
 
-footer {
-    padding: 30px;
-    background: #f8d1df;
+button:hover {
+    background: #A9446B;
+}
+
+.controls {
+    margin-top: 18px;
+}
+
+.music {
+    margin: 15px;
+}
+
+@media(max-width: 480px) {
+    .book {
+        padding: 25px 13px;
+        min-height: 600px;
+    }
+
+    .photo-grid {
+        gap: 12px;
+    }
+
+    .polaroid img {
+        height: 115px;
+    }
+
+    p, .letter {
+        font-size: 15px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="heart">♡</div>
-    <h1>My Little Scrapbook</h1>
-    <p class="subtitle">A little book full of memories</p>
+<audio id="music" loop>
+    <source src="lagu_bunda.mp3" type="audio/mpeg">
+</audio>
 
-    <button onclick="putarMusik()">♫ Play Music</button>
-    <button onclick="pauseMusik()">Ⅱ Pause Music</button>
+<!-- PAGE 1: COVER -->
+<section class="page active">
+    <div class="book cover">
 
-    <audio id="musik" loop>
-        <source src="lagu.mp3" type="audio/mpeg">
-    </audio>
-</header>
+        <div class="heart">♡ ♡ ♡</div>
 
-<h2>✿ Our Beautiful Memories ✿</h2>
-<p>Every picture tells a little story ♡</p>
+        <p class="subtitle">A SPECIAL GIFT FOR</p>
 
-<div class="album" id="album"></div>
+        <h1>
+            MY BELOVED<br>
+            BUNDA ♡
+        </h1>
 
-<div class="note">
-    <h2>♡ Little Notes ♡</h2>
-    <p>
-        Setiap foto menyimpan cerita.
-        Setiap cerita memiliki kenangan.
-        Dan setiap kenangan akan selalu menjadi bagian
-        indah dalam hidup kita.
-    </p>
-    <div class="heart">💗</div>
+        <div class="heart">🌷 💗 🌷</div>
+
+        <p class="subtitle">
+            A little book filled with love
+        </p>
+
+        <p>
+            Made with all our love
+        </p>
+
+        <button onclick="nextPage()">
+            OPEN YOUR GIFT ♡
+        </button>
+
+    </div>
+</section>
+
+<!-- PAGE 2: MEMORIES -->
+<section class="page">
+    <div class="book">
+
+        <div class="heart">♡</div>
+
+        <h2>OUR SWEET MEMORIES</h2>
+
+        <p class="subtitle">
+            Kenangan Indah Bersama Bunda ♡
+        </p>
+
+        <div class="photo-grid">
+
+            <div class="polaroid">
+                <img src="foto1.jpg" alt="Kenangan pertama">
+                <div class="caption">♡ Memory 1 ♡</div>
+            </div>
+
+            <div class="polaroid">
+                <img src="foto2.jpg" alt="Kenangan kedua">
+                <div class="caption">♡ Memory 2 ♡</div>
+            </div>
+
+            <div class="polaroid">
+                <img src="foto3.jpg" alt="Kenangan ketiga">
+                <div class="caption">♡ Memory 3 ♡</div>
+            </div>
+
+            <div class="polaroid">
+                <img src="foto4.jpg" alt="Kenangan keempat">
+                <div class="caption">♡ Memory 4 ♡</div>
+            </div>
+
+        </div>
+
+        <p class="subtitle">
+            Every picture holds a beautiful memory.
+        </p>
+
+        <div class="controls">
+            <button onclick="prevPage()">♡ BACK</button>
+            <button onclick="nextPage()">NEXT ♡</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- PAGE 3: LETTER -->
+<section class="page">
+    <div class="book">
+
+        <div class="heart">💌</div>
+
+        <h2>DEAR MY BELOVED BUNDA</h2>
+
+        <div class="letter">
+
+            Untuk Bunda tersayang,
+
+            <p>
+            Bunda, terima kasih telah menjadi guru pertama
+            dalam hidup kami.
+            </p>
+
+            <p>
+            Terima kasih telah sabar membimbing,
+            mengajarkan, dan memberikan banyak ilmu
+            kepada kami.
+            </p>
+
+            <p>
+            Setiap nasihat, kebaikan, dan pelajaran
+            dari Bunda akan selalu menjadi kenangan
+            yang berharga bagi kami.
+            </p>
+
+            <p>
+            Semoga Bunda selalu diberikan kebahagiaan.
+            Jangan pernah lelah menjadi sosok yang
+            menginspirasi bagi banyak orang.
+            </p>
+
+            <div class="signature">
+                With Love,<br>
+                Anak-anakmu ♡
+            </div>
+
+        </div>
+
+        <h2>WE LOVE YOU, BUNDA ♡</h2>
+
+        <div class="controls">
+            <button onclick="prevPage()">♡ BACK</button>
+            <button onclick="goFirst()">BACK TO COVER ♡</button>
+        </div>
+
+    </div>
+</section>
+
+<div class="music">
+    <button id="musicButton" onclick="toggleMusic()">
+        ♫ PLAY MUSIC
+    </button>
 </div>
 
-<footer>
-    Made with love ♡
-</footer>
-
 <script>
+let currentPage = 0;
 
-const foto = [
-    {nama: "Kenangan pertama ♡", file: "foto1.jpg"},
-    {nama: "Hari yang indah ✿", file: "foto2.jpg"},
-    {nama: "Momen bahagia ♡", file: "foto3.jpg"},
-    {nama: "Senyum terbaik 🌷", file: "foto4.jpg"},
-    {nama: "Our memories 💗", file: "foto5.jpg"},
-    {nama: "Forever memories ♡", file: "foto6.jpg"}
-];
+const pages = document.querySelectorAll(".page");
 
-const album = document.getElementById("album");
+function showPage() {
+    pages.forEach((page, index) => {
+        page.classList.toggle("active", index === currentPage);
+    });
 
-foto.forEach(item => {
-    album.innerHTML += `
-        <div class="photo">
-            <img src="foto/${item.file}" alt="${item.nama}">
-            <p>${item.nama}</p>
-        </div>
-    `;
-});
-
-function putarMusik() {
-    document.getElementById("musik").play();
+    window.scrollTo(0, 0);
 }
 
-function pauseMusik() {
-    document.getElementById("musik").pause();
+function nextPage() {
+    if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage();
+    }
 }
 
+function prevPage() {
+    if (currentPage > 0) {
+        currentPage--;
+        showPage();
+    }
+}
+
+function goFirst() {
+    currentPage = 0;
+    showPage();
+}
+
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+
+function toggleMusic() {
+    if (music.paused) {
+        music.play().then(() => {
+            musicButton.innerText = "♫ PAUSE MUSIC";
+        }).catch(() => {
+            alert("Pastikan file lagu_bunda.mp3 sudah tersedia.");
+        });
+    } else {
+        music.pause();
+        musicButton.innerText = "♫ PLAY MUSIC";
+    }
+}
 </script>
 
 </body>
